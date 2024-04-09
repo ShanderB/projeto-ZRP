@@ -3,16 +3,29 @@ import { Request, Result } from './interfaces/Request';
 import { connect } from 'react-redux';
 import { toggleFavorite } from './state/actions/actions';
 import { API } from './constants';
+import Modal from 'react-modal';
 import './App.css'
 import axios from 'axios';
+
+Modal.setAppElement('#root');
+
 
 function App({ favorites, toggleFavorite }) {
   const [result, setResult] = useState<Result[] | null>(null);
   const [nextUrl, setNextUrl] = useState<string | null>(null);
   const [prevUrl, setPrevUrl] = useState<string | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleToggleFavorite = (pokemon: Result) => {
     toggleFavorite(pokemon);
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   const fetchData = (url: string) => {
@@ -40,12 +53,23 @@ function App({ favorites, toggleFavorite }) {
           <button onClick={() => handleToggleFavorite(item)}>Toggle favorite</button>
         </div>
       ))}
-           <h2>Favorites:</h2>
-      {favorites && favorites.map((item, index) => (
-        <div key={index}>
-          {item.name}: {item.url}
-        </div>
-      ))}
+
+      {favorites.length > 0 && (
+        <button onClick={openModal}>Show favorites</button>
+      )}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Favorites Modal"
+      >
+        <h2>Favorites:</h2>
+        {favorites && favorites.map((item, index) => (
+          <div key={index}>
+            {item.name}: {item.url}
+          </div>
+        ))}
+        <button onClick={closeModal}>Close</button>
+      </Modal>
     </>
   )
 }
