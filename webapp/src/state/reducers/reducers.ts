@@ -1,4 +1,4 @@
-import { ADD_FAVORITE, TOGGLE_FAVORITE } from "../../constants";
+import { TOGGLE_FAVORITE } from "../../constants";
 import { Result } from "../../interfaces/Request";
 
 const initialState: Result[] = [];
