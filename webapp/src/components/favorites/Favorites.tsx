@@ -1,4 +1,5 @@
 import Modal from 'react-modal';
+import './Favorites.css';
 
 function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
 
@@ -26,7 +27,7 @@ function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
   return (
     <>
       {favorites.length > 0 && (
-        <button onClick={openModal}>Show favorites</button>
+        <button className="open-modal-button" onClick={openModal}>Show favorites</button>
       )}
       <Modal
         isOpen={modalIsOpen}
@@ -34,17 +35,17 @@ function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
         contentLabel="Favorites Modal"
         style={customStyles}
       >
-        <h2>Favorites:</h2>
+        <h2 className="modal-title">Favorites:</h2>
         {favorites && favorites.map((item, index) => {
-        const name = item.name.charAt(0).toUpperCase() + item.name.slice(1); // Make the first letter uppercase
+          const name = item.name.charAt(0).toUpperCase() + item.name.slice(1); // Make the first letter uppercase
 
           return (
-            <div key={index} >
-              <span >{name}</span>
+            <div key={index} className="favorite-item">
+              <span className="favorite-name">{name}</span>
             </div>
           )
         })}
-        <button onClick={closeModal}>Close</button>
+        <button className="close-modal-button" onClick={closeModal}>Close</button>
       </Modal>
     </>
   );
