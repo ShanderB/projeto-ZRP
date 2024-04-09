@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import './App.css'
 import axios from 'axios';
 import Favorites from './components/Favorites';
+import Results from './components/Results';
 
 Modal.setAppElement('#root');
 
@@ -35,7 +36,7 @@ function App({ favorites, toggleFavorite }) {
         const data: Request = response.data;
         setResult(data.results);
         setNextUrl(data.next ? API + new URL(data.next).search : null);
-        setPrevUrl(data.previous ?  API + new URL(data.previous).search : null);
+        setPrevUrl(data.previous ? API + new URL(data.previous).search : null);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -48,14 +49,9 @@ function App({ favorites, toggleFavorite }) {
       <button onClick={() => nextUrl && fetchData(nextUrl)} hidden={!nextUrl}>Next</button>
       <button onClick={() => prevUrl && fetchData(prevUrl)} hidden={!prevUrl}>Previous</button>
 
-      {result && result.map((item, index) => (
-        <div key={index}>
-          {item.name}: {item.url}
-          <button onClick={() => handleToggleFavorite(item)}>Toggle favorite</button>
-        </div>
-      ))}
+      <Results result={result} handleToggleFavorite={handleToggleFavorite} />
 
-     <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
+      <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
 
     </>
   )
