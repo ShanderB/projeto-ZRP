@@ -9,6 +9,7 @@ import axios from 'axios';
 import Favorites from './components/favorites/Favorites';
 import Results from './components/results/Results';
 import Input from './components/input/Input';
+import { useModal } from './components/favorites/Service';
 
 Modal.setAppElement('#root');
 
@@ -17,20 +18,17 @@ function App({ favorites, toggleFavorite }) {
   const [result, setResult] = useState<Result[] | null>(null);
   const [nextUrl, setNextUrl] = useState<string | null>(null);
   const [prevUrl, setPrevUrl] = useState<string | null>(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [pokemonName, setPokemonName] = useState('');
+
+  const {
+    modalIsOpen,
+    openModal,
+    closeModal,
+  } = useModal();
 
 
   const handleToggleFavorite = (pokemon: Result) => {
     toggleFavorite(pokemon);
-  };
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
   };
 
   const fetchData = (url: string) => {
@@ -53,7 +51,7 @@ function App({ favorites, toggleFavorite }) {
   }
 
   const fetchPokemon = () => {
-    if (pokemonName === '') {
+    if (!pokemonName) {
       clearTable();
     } else {
       axios.get(`${API}/${pokemonName}`)
@@ -78,7 +76,6 @@ function App({ favorites, toggleFavorite }) {
         clearTable={clearTable}
         result={result}
       />
-
 
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 
