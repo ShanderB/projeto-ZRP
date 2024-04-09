@@ -45,16 +45,16 @@ function App({ favorites, toggleFavorite }) {
 
   return (
     <div className="app-container">
+      <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
+
+      <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
+
       <div className="button-container">
         <button className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch</button>
         <button className="next-button" onClick={() => nextUrl && fetchData(nextUrl)} hidden={!nextUrl}>Next</button>
         <button className="prev-button" onClick={() => prevUrl && fetchData(prevUrl)} hidden={!prevUrl}>Previous</button>
       </div>
-
-      <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
-
-      <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
-      </div>
+    </div>
   )
 }
 
