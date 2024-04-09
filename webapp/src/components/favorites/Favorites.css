@@ -66,3 +66,8 @@
 .open-modal-button:hover {
     background-color: #45a049;
 }
+
+.open-modal-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

@@ -3,7 +3,6 @@ import './Favorites.css';
 
 function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
 
-
   const customStyles = {
     content: {
       top: '50%',
@@ -23,12 +22,16 @@ function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
     },
   };
 
+  const hasFavorites = favorites.length;
 
   return (
     <>
-      {favorites.length > 0 && (
-        <button className="open-modal-button" onClick={openModal}>Show favorites</button>
-      )}
+      <button
+        className={`open-modal-button ${hasFavorites ? '' : 'disabled'}`}
+        onClick={openModal} disabled={!hasFavorites}
+        title={hasFavorites ? '' : 'You need to select a favorite first'}>
+        Show Favorites
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
