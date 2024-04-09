@@ -20,6 +20,7 @@ Modal.setAppElement('#root');
 
 function App({ favorites, toggleFavorite }) {
   const [result, setResult] = useState<Result[] | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     pokemonName,
@@ -51,9 +52,10 @@ function App({ favorites, toggleFavorite }) {
         setResult(data.results);
         setNextUrl(data.next ? API + new URL(data.next).search : null);
         setPrevUrl(data.previous ? API + new URL(data.previous).search : null);
+        setErrorMessage(null);
       })
       .catch(error => {
-        console.error('Error:', error);
+        console.error('Errord:', error);
       });
   }
 
@@ -63,7 +65,7 @@ function App({ favorites, toggleFavorite }) {
     setPrevUrl(null);
   }
 
-  const fetchPokemon = useFetchPokemon(API, pokemonName, setResult, setNextUrl, setPrevUrl, clearTable);
+  const fetchPokemon = useFetchPokemon(API, pokemonName, setResult, setNextUrl, setPrevUrl, clearTable, setErrorMessage);
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
@@ -86,6 +88,7 @@ function App({ favorites, toggleFavorite }) {
         />
         <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
       </div>
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
 
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 
