@@ -51,7 +51,7 @@ function App({ favorites, toggleFavorite }) {
         <button className="prev-button" onClick={() => prevUrl && fetchData(prevUrl)} hidden={!prevUrl}>Previous</button>
       </div>
 
-      <Results result={result} handleToggleFavorite={handleToggleFavorite} />
+      <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 
       <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
       </div>
