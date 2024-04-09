@@ -18,8 +18,6 @@ function App() {
         setResult(data.results);
         setNextUrl(data.next ? API + new URL(data.next).search : null);
         setPrevUrl(data.previous ?  API + new URL(data.previous).search : null);
-
-        console.log(nextUrl)
       })
       .catch(error => {
         console.error('Error:', error);
@@ -29,8 +27,8 @@ function App() {
   return (
     <>
       <button onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch</button>
-      <button onClick={() => fetchData(nextUrl)} hidden={!nextUrl}>Next</button>
-      <button onClick={() => fetchData(prevUrl)} hidden={!prevUrl}>Previous</button>
+      <button onClick={() => nextUrl && fetchData(nextUrl)} hidden={!nextUrl}>Next</button>
+      <button onClick={() => prevUrl && fetchData(prevUrl)} hidden={!prevUrl}>Previous</button>
       {result && result.map((item, index) => <div key={index}>{item.name}: {item.url}</div>)}
     </>
   )
