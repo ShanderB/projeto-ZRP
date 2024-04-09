@@ -67,6 +67,10 @@ function App({ favorites, toggleFavorite }) {
 
   return (
     <div className="app-container">
+      <button className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch All</button>
+
+      <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
+
       <Input
         pokemonName={pokemonName}
         setPokemonName={setPokemonName}
@@ -77,9 +81,7 @@ function App({ favorites, toggleFavorite }) {
 
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 
-      <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
-
-      <Pagination nextUrl={nextUrl} prevUrl={prevUrl} fetchData={fetchData} API={API} />
+      <Pagination nextUrl={nextUrl} prevUrl={prevUrl} fetchData={fetchData} />
     </div>
   )
 }

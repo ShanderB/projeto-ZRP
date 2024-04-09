@@ -4,7 +4,7 @@ import './Inputs.css'
 
 const Input: React.FC<InputProps> = ({ pokemonName, setPokemonName, fetchPokemon, clearTable, result }) => {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
 
             <input
                 type="text"
