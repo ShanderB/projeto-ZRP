@@ -6,6 +6,7 @@ import { API } from './constants';
 import Modal from 'react-modal';
 import './App.css'
 import axios from 'axios';
+import Favorites from './components/Favorites';
 
 Modal.setAppElement('#root');
 
@@ -54,22 +55,8 @@ function App({ favorites, toggleFavorite }) {
         </div>
       ))}
 
-      {favorites.length > 0 && (
-        <button onClick={openModal}>Show favorites</button>
-      )}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Favorites Modal"
-      >
-        <h2>Favorites:</h2>
-        {favorites && favorites.map((item, index) => (
-          <div key={index}>
-            {item.name}: {item.url}
-          </div>
-        ))}
-        <button onClick={closeModal}>Close</button>
-      </Modal>
+     <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
+
     </>
   )
 }
