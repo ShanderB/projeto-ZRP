@@ -6,7 +6,7 @@ import { API } from './constants';
 import Modal from 'react-modal';
 import './App.css'
 import axios from 'axios';
-import Favorites from './components/Favorites';
+import Favorites from './components/favorites/Favorites';
 import Results from './components/results/Results';
 
 Modal.setAppElement('#root');
