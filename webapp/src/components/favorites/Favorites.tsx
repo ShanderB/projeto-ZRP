@@ -28,9 +28,10 @@ function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
     <>
       <button
         className={`open-modal-button ${hasFavorites ? '' : 'disabled'}`}
-        onClick={openModal} disabled={!hasFavorites}
+        onClick={openModal}
+        disabled={!hasFavorites}
         title={hasFavorites ? '' : 'You need to select a favorite first'}
-        style={{position: 'absolute', marginLeft: '47%'}}>
+        >
         Show Favorites
       </button>
       <Modal

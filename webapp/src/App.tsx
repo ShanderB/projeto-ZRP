@@ -40,7 +40,6 @@ function App({ favorites, toggleFavorite }) {
     closeModal,
   } = useModal();
 
-
   const handleToggleFavorite = (pokemon: Result) => {
     toggleFavorite(pokemon);
   };
@@ -55,7 +54,7 @@ function App({ favorites, toggleFavorite }) {
         setErrorMessage(null);
       })
       .catch(error => {
-        console.error('Errord:', error);
+        console.error('Error:', error);
       });
   }
 
@@ -75,9 +74,13 @@ function App({ favorites, toggleFavorite }) {
 
   return (
     <div className="app-container">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <button  style={{position: 'absolute', marginLeft: '-38%'}} className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch All</button>
-        <div style={{ visibility: (!!nextUrl || !!prevUrl) ? 'hidden' : 'visible'}}></div>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        gap: "17rem"
+      }}>
+        <button className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch All</button>
         <Input
           pokemonName={pokemonName}
           setPokemonName={setPokemonName}

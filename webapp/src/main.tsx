@@ -8,7 +8,6 @@ import React from 'react';
 if (import.meta.hot) {
   import.meta.hot.on(
     "vite:beforeUpdate",
-    /* eslint-disable-next-line no-console */
     () => console.clear()
   );
 }
