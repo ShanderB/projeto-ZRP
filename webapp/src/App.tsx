@@ -65,19 +65,27 @@ function App({ favorites, toggleFavorite }) {
 
   const fetchPokemon = useFetchPokemon(API, pokemonName, setResult, setNextUrl, setPrevUrl, clearTable);
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      fetchPokemon();
+    }
+  };
+
   return (
     <div className="app-container">
-      <button className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch All</button>
-
-      <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
-
-      <Input
-        pokemonName={pokemonName}
-        setPokemonName={setPokemonName}
-        fetchPokemon={fetchPokemon}
-        clearTable={clearTable}
-        result={result}
-      />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <button  style={{position: 'absolute', marginLeft: '-38%'}} className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch All</button>
+        <div style={{ visibility: (!!nextUrl || !!prevUrl) ? 'hidden' : 'visible'}}></div>
+        <Input
+          pokemonName={pokemonName}
+          setPokemonName={setPokemonName}
+          fetchPokemon={fetchPokemon}
+          clearTable={clearTable}
+          result={result}
+          onKeyDown={handleKeyPress}
+        />
+        <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
+      </div>
 
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 

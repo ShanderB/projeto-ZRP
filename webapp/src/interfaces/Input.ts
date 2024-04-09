@@ -6,4 +6,5 @@ export interface InputProps {
     fetchPokemon: () => void;
     clearTable: () => void;
     result: Result[] | null;
+    onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
