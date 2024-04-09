@@ -7,5 +7,4 @@ export interface Request {
 
 export interface Result {
     name: string;
-    url: string;
 }

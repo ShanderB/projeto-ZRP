@@ -45,11 +45,15 @@ function App({ favorites, toggleFavorite }) {
       });
   }
 
+  const clearTable = () => {
+    setResult([]);
+    setNextUrl(null);
+    setPrevUrl(null);
+  }
+
   const fetchPokemon = () => {
     if (pokemonName === '') {
-      setResult([]);
-      setNextUrl(null);
-      setPrevUrl(null);
+      clearTable();
     } else {
       axios.get(`${API}/${pokemonName}`)
         .then(response => {
@@ -68,11 +72,14 @@ function App({ favorites, toggleFavorite }) {
     <div className="app-container">
       <input
         type="text"
+        className="pokemon-input"
         value={pokemonName}
         onChange={e => setPokemonName(e.target.value)}
         placeholder="Enter Pokemon name"
       />
       <button onClick={fetchPokemon}>Search</button>
+      {result.length > 0 && <button onClick={clearTable}>Clear Table</button>}
+
 
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 
