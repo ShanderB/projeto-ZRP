@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Request, Result } from './interfaces/Request';
+import { API } from './constants';
 import './App.css'
 import axios from 'axios';
-
-const API = "http://localhost:8080/api"
 
 function App() {
   const [result, setResult] = useState<Result[] | null>(null);
