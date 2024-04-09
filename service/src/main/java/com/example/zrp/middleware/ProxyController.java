@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -27,5 +28,12 @@ public class ProxyController {
         
         ResponseEntity<String> response = restTemplate.getForEntity(builder.toUriString(), String.class);
         return response;
+    }
+
+    @GetMapping("/api/{name}")
+    public ResponseEntity<String> getPokemon(@PathVariable String name) {
+        String pokeApiUrl = apiUrlString + "/" + name;
+        ResponseEntity<String> response = restTemplate.getForEntity(pokeApiUrl, String.class);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
 }
