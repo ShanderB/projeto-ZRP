@@ -13,7 +13,7 @@ const useFetchPokemon = (
     if (!pokemonName) {
       clearTable();
     } else {
-      axios.get(`${API}/${pokemonName}`)
+      axios.get(`${API}/${pokemonName.toLowerCase()}`)
         .then(response => {
           const data: Result = response.data;
           setResult([data]);
