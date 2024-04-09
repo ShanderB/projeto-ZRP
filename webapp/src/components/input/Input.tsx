@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputProps } from '../../interfaces/Input';
+import './Inputs.css'
 
 const Input: React.FC<InputProps> = ({ pokemonName, setPokemonName, fetchPokemon, clearTable, result }) => {
     return (

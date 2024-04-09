@@ -10,15 +10,28 @@ import Favorites from './components/favorites/Favorites';
 import Results from './components/results/Results';
 import Input from './components/input/Input';
 import { useModal } from './components/favorites/Service';
+import { usePokemonNameState } from './state/Service';
+import Pagination from './components/pagination/Pagination';
+import { useUrlState } from './components/pagination/Service';
+import useFetchPokemon from './AppService';
 
 Modal.setAppElement('#root');
 
 
 function App({ favorites, toggleFavorite }) {
   const [result, setResult] = useState<Result[] | null>(null);
-  const [nextUrl, setNextUrl] = useState<string | null>(null);
-  const [prevUrl, setPrevUrl] = useState<string | null>(null);
-  const [pokemonName, setPokemonName] = useState('');
+
+  const {
+    pokemonName,
+    setPokemonName,
+  } = usePokemonNameState();
+
+  const {
+    nextUrl,
+    setNextUrl,
+    prevUrl,
+    setPrevUrl,
+  } = useUrlState();
 
   const {
     modalIsOpen,
@@ -50,22 +63,7 @@ function App({ favorites, toggleFavorite }) {
     setPrevUrl(null);
   }
 
-  const fetchPokemon = () => {
-    if (!pokemonName) {
-      clearTable();
-    } else {
-      axios.get(`${API}/${pokemonName}`)
-        .then(response => {
-          const data: Result = response.data;
-          setResult([data]);
-          setNextUrl(null);
-          setPrevUrl(null);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
-  }
+  const fetchPokemon = useFetchPokemon(API, pokemonName, setResult, setNextUrl, setPrevUrl, clearTable);
 
   return (
     <div className="app-container">
@@ -81,11 +79,7 @@ function App({ favorites, toggleFavorite }) {
 
       <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
 
-      <div className="button-container">
-        <button className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch</button>
-        <button className="next-button" onClick={() => nextUrl && fetchData(nextUrl)} hidden={!nextUrl}>Next</button>
-        <button className="prev-button" onClick={() => prevUrl && fetchData(prevUrl)} hidden={!prevUrl}>Previous</button>
-      </div>
+      <Pagination nextUrl={nextUrl} prevUrl={prevUrl} fetchData={fetchData} API={API} />
     </div>
   )
 }
