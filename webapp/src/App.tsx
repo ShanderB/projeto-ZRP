@@ -17,6 +17,8 @@ function App({ favorites, toggleFavorite }) {
   const [nextUrl, setNextUrl] = useState<string | null>(null);
   const [prevUrl, setPrevUrl] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pokemonName, setPokemonName] = useState('');
+
 
   const handleToggleFavorite = (pokemon: Result) => {
     toggleFavorite(pokemon);
@@ -43,8 +45,35 @@ function App({ favorites, toggleFavorite }) {
       });
   }
 
+  const fetchPokemon = () => {
+    if (pokemonName === '') {
+      setResult([]);
+      setNextUrl(null);
+      setPrevUrl(null);
+    } else {
+      axios.get(`${API}/${pokemonName}`)
+        .then(response => {
+          const data: Result = response.data;
+          setResult([data]);
+          setNextUrl(null);
+          setPrevUrl(null);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  }
+
   return (
     <div className="app-container">
+      <input
+        type="text"
+        value={pokemonName}
+        onChange={e => setPokemonName(e.target.value)}
+        placeholder="Enter Pokemon name"
+      />
+      <button onClick={fetchPokemon}>Search</button>
+
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
 
       <Favorites favorites={favorites} modalIsOpen={modalIsOpen} closeModal={closeModal} openModal={openModal} />
