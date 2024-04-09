@@ -1,7 +1,7 @@
 @echo off
 
 
-netstat -ano | findstr :8080 > nul
+netstat -ano | findstr :8080
 if errorlevel 1 (
     echo Port 8080 is free
 ) else (
