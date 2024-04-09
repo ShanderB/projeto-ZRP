@@ -6,3 +6,12 @@
     padding: 20px;
     background-color: #f5f5f5;
 }
+
+.fetch-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.fetch-button:disabled:hover {
+    background-color: #ccc;
+}

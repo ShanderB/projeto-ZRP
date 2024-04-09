@@ -80,7 +80,7 @@ function App({ favorites, toggleFavorite }) {
         flexDirection: "row",
         gap: "17rem"
       }}>
-        <button className="fetch-button" onClick={() => fetchData(API)} hidden={!!nextUrl || !!prevUrl}>Fetch All</button>
+        <button className="fetch-button" onClick={() => fetchData(API)} disabled={!!nextUrl || !!prevUrl}>Fetch All</button>
         <Input
           pokemonName={pokemonName}
           setPokemonName={setPokemonName}
