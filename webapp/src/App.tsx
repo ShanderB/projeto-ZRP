@@ -8,6 +8,7 @@ import './App.css'
 import axios from 'axios';
 import Favorites from './components/favorites/Favorites';
 import Results from './components/results/Results';
+import Input from './components/input/Input';
 
 Modal.setAppElement('#root');
 
@@ -70,15 +71,13 @@ function App({ favorites, toggleFavorite }) {
 
   return (
     <div className="app-container">
-      <input
-        type="text"
-        className="pokemon-input"
-        value={pokemonName}
-        onChange={e => setPokemonName(e.target.value)}
-        placeholder="Enter Pokemon name"
+      <Input
+        pokemonName={pokemonName}
+        setPokemonName={setPokemonName}
+        fetchPokemon={fetchPokemon}
+        clearTable={clearTable}
+        result={result}
       />
-      <button onClick={fetchPokemon}>Search</button>
-      {result.length > 0 && <button onClick={clearTable}>Clear Table</button>}
 
 
       <Results result={result} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />
