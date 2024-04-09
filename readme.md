@@ -1,6 +1,6 @@
 # Which dependencies
 Service - Maven 3.9.6, JDK 17, SpringBoot
-Webapp - React 18, Axios 1.6
+Webapp - React 18, Axios 1.6, Redux, React Redux
 
 # How to run the project:
 
