@@ -35,11 +35,15 @@ function Favorites({ favorites, modalIsOpen, closeModal, openModal }) {
         style={customStyles}
       >
         <h2>Favorites:</h2>
-        {favorites && favorites.map((item, index) => (
-          <div key={index} >
-            <span >{item.name}</span>
-          </div>
-        ))}
+        {favorites && favorites.map((item, index) => {
+        const name = item.name.charAt(0).toUpperCase() + item.name.slice(1); // Make the first letter uppercase
+
+          return (
+            <div key={index} >
+              <span >{name}</span>
+            </div>
+          )
+        })}
         <button onClick={closeModal}>Close</button>
       </Modal>
     </>
