@@ -1,2 +1,2 @@
 export const API = "http://localhost:8080/api"
-export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';

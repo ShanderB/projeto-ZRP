@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { Request, Result } from './interfaces/Request';
 import { connect } from 'react-redux';
-import { addFavorite } from './state/actions/actions';
+import { toggleFavorite } from './state/actions/actions';
 import { API } from './constants';
 import './App.css'
 import axios from 'axios';
 
-function App({ favorites, addFavorite }) {
+function App({ favorites, toggleFavorite }) {
   const [result, setResult] = useState<Result[] | null>(null);
   const [nextUrl, setNextUrl] = useState<string | null>(null);
   const [prevUrl, setPrevUrl] = useState<string | null>(null);
 
-  const handleAddFavorite = (pokemon: Result) => {
-    addFavorite(pokemon);
+  const handleToggleFavorite = (pokemon: Result) => {
+    toggleFavorite(pokemon);
   };
 
   const fetchData = (url: string) => {
@@ -37,7 +37,7 @@ function App({ favorites, addFavorite }) {
       {result && result.map((item, index) => (
         <div key={index}>
           {item.name}: {item.url}
-          <button onClick={() => handleAddFavorite(item)}>Add to favorites</button>
+          <button onClick={() => handleToggleFavorite(item)}>Toggle favorite</button>
         </div>
       ))}
            <h2>Favorites:</h2>
@@ -55,6 +55,6 @@ const mapStateToProps = (state: Result[]) => ({
 });
 
 const mapDispatchToProps = {
-  addFavorite,
+  toggleFavorite,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

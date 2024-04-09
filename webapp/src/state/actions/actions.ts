@@ -1,7 +1,7 @@
-import { ADD_FAVORITE } from "../../constants";
+import { ADD_FAVORITE, TOGGLE_FAVORITE } from "../../constants";
 import { Result } from "../../interfaces/Request";
 
-export const addFavorite = (pokemon: Result) => ({
-  type: ADD_FAVORITE,
+export const toggleFavorite = (pokemon: Result) => ({
+  type: TOGGLE_FAVORITE,
   payload: pokemon,
 });
